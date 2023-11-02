@@ -11,7 +11,7 @@ exports.registerUser = async (req, res, next) => {
         crop: "scale"
     }, (err, res) => {
         console.log(err, res);
-    });
+    });    
     const { name, email, password, role } = req.body;
     const user = await User.create({
         name,
