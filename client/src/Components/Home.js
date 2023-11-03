@@ -1,12 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import MetaData from "./Layout/MetaData";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import Product from "./Product/Product";
 import Loader from "./Layout/Loader";
-import { useParams } from "react-router-dom";
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+
+const { Range } = Slider;
 
 const categories = [
   "Electronics",
@@ -23,8 +25,6 @@ const categories = [
   "Home",
 ];
 
-const { Range } = Slider; 
-
 const Home = () => {
   let { keyword } = useParams();
   const [loading, setLoading] = useState(true);
@@ -36,9 +36,6 @@ const Home = () => {
   const [filteredProductsCount, setFilteredProductsCount] = useState(0);
   const [price, setPrice] = useState([1, 1000]);
   const [category, setCategory] = useState("");
-
-  // const createSliderWithTooltip = Slider.createSliderWithTooltip;
-  // const Range = createSliderWithTooltip(Slider.Range);
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
@@ -62,6 +59,7 @@ const Home = () => {
     setFilteredProductsCount(res.data.filteredProductsCount);
     setLoading(false);
   };
+
   useEffect(() => {
     getProducts(currentPage, keyword, price, category);
   }, [currentPage, keyword, price, category]);
@@ -70,8 +68,9 @@ const Home = () => {
   if (keyword) {
     count = filteredProductsCount;
   }
+
   return (
-    <>
+    <div>
       {loading ? (
         <Loader />
       ) : (
@@ -87,8 +86,8 @@ const Home = () => {
                       <div className="px-5">
                         <Range
                           marks={{
-                            1: `$1`,
-                            1000: `$1000`,
+                            1: "$1",
+                            1000: "$1000",
                           }}
                           min={1}
                           max={1000}
@@ -106,16 +105,16 @@ const Home = () => {
                         <div className="mt-5">
                           <h4 className="mb-3">Categories</h4>
                           <ul className="pl-0">
-                            {categories.map((category) => (
+                            {categories.map((cat) => (
                               <li
                                 style={{
                                   cursor: "pointer",
                                   listStyleType: "none",
                                 }}
-                                key={category}
-                                onClick={() => setCategory(category)}
+                                key={cat}
+                                onClick={() => setCategory(cat)}
                               >
-                                {category}
+                                {cat}
                               </li>
                             ))}
                           </ul>
@@ -126,11 +125,7 @@ const Home = () => {
                     <div className="col-6 col-md-9">
                       <div className="row">
                         {products.map((product) => (
-                          <Product
-                            key={product._id}
-                            product={product}
-                            col={4}
-                          />
+                          <Product key={product._id} product={product} col={4} />
                         ))}
                       </div>
                     </div>
@@ -161,8 +156,8 @@ const Home = () => {
           </div>
         </Fragment>
       )}
-    </>
+    </div>
   );
-};
+}
 
 export default Home;

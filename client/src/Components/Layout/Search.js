@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { FaSearch } from 'react-icons/fa';
 
 const Search = () => {
 
@@ -16,19 +17,11 @@ const Search = () => {
     }
 
     return (
-        <form onSubmit={searchHandler} >
+        <form onSubmit={searchHandler} className="form-control">
             <div className="input-group">
-                <input
-                    type="text"
-                    id="search_field"
-                    className="form-control"
-                    placeholder="Enter Product Name ..."
-                    onChange={(e) => setKeyword(e.target.value)}
-                />
+                <input type="text" id="search_field" placeholder="Search" onChange={(e) => setKeyword(e.target.value)} className="input input-bordered w-24 md:w-auto" />
                 <div className="input-group-append">
-                    <button id="search_btn" className="btn">
-                        <i className="fa fa-search" aria-hidden="true"></i>
-                    </button>
+                    <button className="btn"><FaSearch /></button>
                 </div>
             </div>
         </form>

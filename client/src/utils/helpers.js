@@ -1,3 +1,11 @@
+export const isAuthenticated = () => {
+    if (window !== 'undefined') {
+      return sessionStorage.getItem('token') !== null;
+    }
+    return false;
+  };
+  
+
 export const authenticate = (data, next) => {
     if (window !== 'undefined') {
         // console.log('authenticate', response)
