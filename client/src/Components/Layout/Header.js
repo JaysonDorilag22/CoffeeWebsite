@@ -71,6 +71,11 @@ const Header = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/cart">
+                  <a className="justify-between">Cart</a>
+                </Link>
+              </li>
+              <li>
                 <Link to="/orders/me">
                   <a>
                     Orders
